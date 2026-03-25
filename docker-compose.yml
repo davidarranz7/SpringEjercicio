@@ -1,0 +1,29 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: mariadb_videojuegos
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: abc123.
+      MARIADB_DATABASE: videojuegos
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: abc123.
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - mariadb_data:/var/lib/mysql
+  app:
+    build: .
+    container_name: spring_app
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/videojuegos
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: abc123.
+volumes:
+  mariadb_data:
