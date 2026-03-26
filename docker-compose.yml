@@ -1,7 +1,7 @@
 services:
   db:
     image: mariadb:latest
-    container_name: mariadb_videojuegos
+    container_name: videojuegos
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: abc123.
