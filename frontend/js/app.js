@@ -1,4 +1,4 @@
-const API_URL = "/juegos";
+const API_URL = "http://192.168.109.6:8080/juegos";
 
 async function cargarJuegos() {
     const contenedor = document.getElementById("juegos");

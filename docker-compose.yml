@@ -25,5 +25,12 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/videojuegos
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: abc123.
+
+  front:
+    build: ./frontend
+    container_name: frontend_app
+    restart: always
+    ports:
+      - "8081:80"
 volumes:
   mariadb_data:
