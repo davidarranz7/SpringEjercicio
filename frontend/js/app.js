@@ -1,4 +1,4 @@
-const API_URL = "http://192.168.109.6:8080/juegos";
+const API_URL = "http://209.97.178.50:8080/juegos";
 
 async function cargarJuegos() {
     const contenedor = document.getElementById("juegos");
@@ -84,22 +84,19 @@ document.getElementById("juegoForm").addEventListener("submit", async function (
             throw new Error(errorTexto || "Error al guardar el juego");
         }
 
-        mostrarMensaje(id ? "Juego actualizado correctamente" : "Juego añadido correctamente");
+        mostrarMensaje(id ? "Juego actualizado" : "Juego añadido");
         limpiarFormulario();
         cargarJuegos();
 
     } catch (error) {
         console.error(error);
-        mostrarMensaje(error.message || "Error al guardar el juego", true);
+        mostrarMensaje(error.message || "Error al guardar", true);
     }
 });
 
 async function eliminarJuego(id) {
-    const confirmado = confirm("¿Seguro que quieres eliminar este juego?");
-
-    if (!confirmado) {
-        return;
-    }
+    const confirmado = confirm("¿Eliminar juego?");
+    if (!confirmado) return;
 
     try {
         const response = await fetch(`${API_URL}/${id}`, {
@@ -107,15 +104,15 @@ async function eliminarJuego(id) {
         });
 
         if (!response.ok) {
-            throw new Error("No se pudo eliminar el juego");
+            throw new Error("Error al eliminar");
         }
 
-        mostrarMensaje("Juego eliminado correctamente");
+        mostrarMensaje("Juego eliminado");
         cargarJuegos();
 
     } catch (error) {
         console.error(error);
-        mostrarMensaje("Error al eliminar el juego", true);
+        mostrarMensaje("Error al eliminar", true);
     }
 }
 
@@ -124,7 +121,7 @@ async function editarJuego(id) {
         const response = await fetch(`${API_URL}/${id}`);
 
         if (!response.ok) {
-            throw new Error("No se pudo cargar el juego");
+            throw new Error("Error al cargar");
         }
 
         const juego = await response.json();
@@ -134,16 +131,12 @@ async function editarJuego(id) {
         document.getElementById("plataforma").value = juego.plataforma || "";
         document.getElementById("genero").value = juego.genero || "";
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-        mostrarMensaje("Juego cargado para editar");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        mostrarMensaje("Editando juego");
 
     } catch (error) {
         console.error(error);
-        mostrarMensaje("Error al cargar el juego para editar", true);
+        mostrarMensaje("Error al cargar juego", true);
     }
 }
 
@@ -163,4 +156,7 @@ function mostrarMensaje(texto, esError = false) {
         mensaje.textContent = "";
         mensaje.className = "";
     }, 3000);
-}
+}y
+
+
+

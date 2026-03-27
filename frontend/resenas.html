@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reseñas</title>
+    <link rel="stylesheet" href="./css/resenas.css">
+</head>
+<body onload="cargarResenas()">
+
+<div class="container">
+    <nav>
+        <a href="./index.html">Juegos</a>
+        <a href="./usuarios.html">Usuarios</a>
+        <a href="./resenas.html">Reseñas</a>
+    </nav>
+
+    <h1>📝 Gestión de Reseñas</h1>
+
+    <form id="resenaForm">
+        <input type="hidden" id="resenaId">
+
+        <input type="number" id="usuarioId" placeholder="ID Usuario" required>
+        <input type="number" id="juegoId" placeholder="ID Juego" required>
+        <input type="text" id="comentario" placeholder="Comentario" required>
+
+        <button type="submit">Guardar Reseña</button>
+    </form>
+
+    <div id="mensaje"></div>
+
+    <div id="resenas" class="grid"></div>
+</div>
+
+<script src="./js/resenas.js"></script>
+</body>
+</html>
